@@ -10,8 +10,6 @@
 *.userosscache
 *.sln.docstates
 
-GameClient/
-
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
