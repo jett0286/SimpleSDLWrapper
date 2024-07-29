@@ -18,7 +18,6 @@ class SSW_GraphicsManager
 		void setBackgroundColor (SDL_Color backgroundColor);
 
 		void registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement);
-		void registerGraphicsElementFront (SSW_GraphicsElement_Base* graphicsElement);
 
 		void loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth);
 		void unloadSprites ();
@@ -39,6 +38,7 @@ class SSW_GraphicsManager
 
 		SDL_Color backgroundColor_;
 
+		// the integer stores the priority, highest is drawn to the front
 		std::vector<SSW_GraphicsElement_Base*> vectorGraphicsElements_;
 
 		std::vector<SSW_Sprite*> vectorSpriteData_;

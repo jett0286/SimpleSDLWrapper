@@ -25,9 +25,7 @@ class SSW_Window
 		void handleInput ();
 
 		void registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement);
-		void registerGraphicsElementFront (SSW_GraphicsElement_Base* graphicsElement);
 		void registerMouseElement (SSW_MouseElement* mouseElement);
-		void registerMouseElementFront (SSW_MouseElement* mouseElement);
 
 	private:
 		SSW_InputManager inputMan_;

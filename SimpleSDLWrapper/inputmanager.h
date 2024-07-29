@@ -15,8 +15,7 @@ class SSW_InputManager
 		void remapKey (SDL_Keycode src, SDL_Keycode dest);
 		
 		void registerMouseElement (SSW_MouseElement* mouseElement);
-		void registerMouseElementFront (SSW_MouseElement* mouseElement);
-
+		
 		SSW_Command_Base* getCommandFromKey (SDL_Keycode kcode);
 		// overloaded [] for getting and setting?
 

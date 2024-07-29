@@ -60,17 +60,7 @@ void SSW_Window::registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElem
   graphicsMan_.registerGraphicsElement (graphicsElement);
 }
 
-void SSW_Window::registerGraphicsElementFront (SSW_GraphicsElement_Base* graphicsElement)
-{
-  graphicsMan_.registerGraphicsElementFront (graphicsElement);
-}
-
 void SSW_Window::registerMouseElement (SSW_MouseElement* mouseElement)
 {
   inputMan_.registerMouseElement (mouseElement);
-}
-
-void SSW_Window::registerMouseElementFront (SSW_MouseElement* mouseElement)
-{
-  inputMan_.registerMouseElementFront (mouseElement);
 }

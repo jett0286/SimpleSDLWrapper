@@ -11,6 +11,7 @@ SSW_MouseElement::SSW_MouseElement ()
 	onMouseMove_ = NULL;
 	isHovering_ = false;
 	isEnabled_ = true;
+	priority_ = 0;
 }
 
 SSW_MouseElement::SSW_MouseElement (SDL_Rect clickableRect = {0, 0, 0, 0}, SSW_Command_Base* onLeftClick = NULL, SSW_Command_Base* onLeftUnclick = NULL, 
@@ -25,7 +26,7 @@ SSW_MouseElement::SSW_MouseElement (SDL_Rect clickableRect = {0, 0, 0, 0}, SSW_C
 	onMouseMove_ = onMouseMove;
 	isHovering_ = false;
 	isEnabled_ = true;
-	
+	priority_ = 0;
 }
 
 void SSW_MouseElement::executeLeftClick ()
@@ -158,4 +159,14 @@ void SSW_MouseElement::setOnHover (SSW_Command_Base* onHover)
 void SSW_MouseElement::setOnMouseMove (SSW_Command_Base* onMouseMove)
 {
 	onMouseMove_ = onMouseMove;
+}
+
+void SSW_MouseElement::setPriority (int priority)
+{
+	priority_ = priority;
+}
+
+int SSW_MouseElement::getPriority ()
+{
+	return priority_;
 }

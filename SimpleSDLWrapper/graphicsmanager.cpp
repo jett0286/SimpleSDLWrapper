@@ -57,9 +57,9 @@ void SSW_GraphicsManager::refresh ()
 {
   SDL_RenderClear (sdlrenderer_);
 
-  for (int i = (int)vectorGraphicsElements_.size() - 1; i >= 0; i--)
+  for (SSW_GraphicsElement_Base* pGfxElement : vectorGraphicsElements_)
   {
-    vectorGraphicsElements_[i]->render (sdlrenderer_);
+    pGfxElement->render (sdlrenderer_);
   }
 
   SDL_SetRenderDrawColor (sdlrenderer_, backgroundColor_.r, backgroundColor_.g, backgroundColor_.b, backgroundColor_.a);
@@ -74,11 +74,6 @@ void SSW_GraphicsManager::setBackgroundColor (SDL_Color backgroundColor)
 void SSW_GraphicsManager::registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement)
 {
   vectorGraphicsElements_.push_back (graphicsElement);
-}
-
-void SSW_GraphicsManager::registerGraphicsElementFront (SSW_GraphicsElement_Base* graphicsElement)
-{
-  vectorGraphicsElements_.insert(vectorGraphicsElements_.begin (), graphicsElement);
 }
 
 void SSW_GraphicsManager::loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth)

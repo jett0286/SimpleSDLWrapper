@@ -33,6 +33,9 @@ class SSW_MouseElement
 		void setOnRightUnclick (SSW_Command_Base* onRightUnclick);
 		void setOnHover (SSW_Command_Base* onHover);
 		void setOnMouseMove (SSW_Command_Base* onMouseMove);
+
+		void setPriority (int priority);
+		int getPriority ();
 	protected:
 		SDL_Rect clickableRect_;
 		SSW_Command_Base* onLeftClick_;
@@ -44,4 +47,6 @@ class SSW_MouseElement
 
 		bool isHovering_;
 		bool isEnabled_;
+
+		int priority_; // higher is front-er
 };

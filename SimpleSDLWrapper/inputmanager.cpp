@@ -26,12 +26,26 @@ void SSW_InputManager::remapKey (SDL_Keycode kcodeSrc, SDL_Keycode kcodeDest)
 
 void SSW_InputManager::registerMouseElement (SSW_MouseElement* mouseElement)
 {
-  vectorMouseElements_.push_back (mouseElement);
-}
-
-void SSW_InputManager::registerMouseElementFront (SSW_MouseElement* mouseElement)
-{
-  vectorMouseElements_.insert (vectorMouseElements_.begin (), mouseElement);
+  std::vector<SSW_MouseElement*>::iterator i;
+  
+  for (i = vectorMouseElements_.begin (); i != vectorMouseElements_.end (); i++)
+  {
+    // IF SOMETHING DOESN"T WORK WITH PRIORITY< IT"S PROBABLY THIS
+    if (mouseElement->getPriority() > (*i)->getPriority ())
+    {
+      continue;
+    }
+    else if (mouseElement->getPriority() == (*i)->getPriority())
+    {
+      break;
+    }
+    else
+    {
+      i--; // overstep of 1, stepping back
+      break;
+    }
+  }
+  vectorMouseElements_.insert (i, mouseElement);
 }
 
 SSW_Command_Base* SSW_InputManager::getCommandFromKey (SDL_Keycode kcode)
