@@ -2,12 +2,12 @@
 
 SSW_Window::SSW_Window ()
 {
-  graphicsMan_.init (480, 640);
+  graphicsMan_.initSDL (480, 640);
 }
 
 SSW_Window::SSW_Window (int winHeight, int winWidth)
 {
-  graphicsMan_.init (winHeight, winWidth);
+  graphicsMan_.initSDL (winHeight, winWidth);
 }
 
 void SSW_Window::refresh ()

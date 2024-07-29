@@ -12,7 +12,7 @@ class SSW_GraphicsManager
 {
 	public:
 		~SSW_GraphicsManager ();
-		bool init (int winHeight, int winWidth);
+		bool initSDL (int winHeight, int winWidth);
 		void refresh ();
 
 		void setBackgroundColor (SDL_Color backgroundColor);

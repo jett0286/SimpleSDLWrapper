@@ -21,7 +21,7 @@ SSW_GraphicsManager::~SSW_GraphicsManager ()
   vectorGraphicsElements_.clear ();
 }
 
-bool SSW_GraphicsManager::init (int winHeight, int winWidth)
+bool SSW_GraphicsManager::initSDL (int winHeight, int winWidth)
 {
   sdlrenderer_ = NULL;
   sdlwindow_ = NULL;

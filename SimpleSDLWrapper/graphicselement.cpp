@@ -73,8 +73,6 @@ void SSW_GraphicsElement_SolidColor::render (SDL_Renderer* sdlrenderer)
 	{
 		SDL_SetRenderDrawColor (sdlrenderer, renderColor_.r, renderColor_.g, renderColor_.b, renderColor_.a);
 		SDL_RenderFillRect (sdlrenderer, &destRect_);
-		SDL_SetRenderDrawColor (sdlrenderer, 0x00, 0x00, 0x00, 0xFF); // REMOVE ME
-		SDL_RenderDrawRect (sdlrenderer, &destRect_); // REMOVE ME
 	}
 }
 
