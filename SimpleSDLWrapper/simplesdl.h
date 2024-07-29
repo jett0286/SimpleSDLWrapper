@@ -19,15 +19,15 @@ class SSW_Window
 
 		SSW_Sprite* getSpriteFromID (int spriteID);
 		
-		void mapKey (SDL_Keycode, SSW_Command*);
+		void mapKey (SDL_Keycode, SSW_Command_Base*);
 		void unmapKey (SDL_Keycode);
 		void remapKey (SDL_Keycode src, SDL_Keycode dest);
 		void handleInput ();
 
-		void registerGraphicsElement (SSW_GraphicsElement* graphicsElement);
-		void registerGraphicsElementFront (SSW_GraphicsElement* graphicsElement);
-		void registerMouseElement (MouseElement* mouseElement);
-		void registerMouseElementFront (MouseElement* mouseElement);
+		void registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement);
+		void registerGraphicsElementFront (SSW_GraphicsElement_Base* graphicsElement);
+		void registerMouseElement (SSW_MouseElement* mouseElement);
+		void registerMouseElementFront (SSW_MouseElement* mouseElement);
 
 	private:
 		SSW_InputManager inputMan_;

@@ -8,7 +8,7 @@ SSW_InputManager::SSW_InputManager ()
   currentEvent_ = {0}; // gets rid of a visual studio warning
 }
 
-void SSW_InputManager::encodeMapKey (SDL_Keycode kcode, SSW_Command* pCommand)
+void SSW_InputManager::encodeMapKey (SDL_Keycode kcode, SSW_Command_Base* pCommand)
 {
 	keyPressMap_.emplace(kcode, pCommand);
 }
@@ -24,17 +24,17 @@ void SSW_InputManager::remapKey (SDL_Keycode kcodeSrc, SDL_Keycode kcodeDest)
   keyPressMap_[kcodeSrc] = NULL;
 }
 
-void SSW_InputManager::registerMouseElement (MouseElement* mouseElement)
+void SSW_InputManager::registerMouseElement (SSW_MouseElement* mouseElement)
 {
   vectorMouseElements_.push_back (mouseElement);
 }
 
-void SSW_InputManager::registerMouseElementFront (MouseElement* mouseElement)
+void SSW_InputManager::registerMouseElementFront (SSW_MouseElement* mouseElement)
 {
   vectorMouseElements_.insert (vectorMouseElements_.begin (), mouseElement);
 }
 
-SSW_Command* SSW_InputManager::getCommandFromKey (SDL_Keycode kcode)
+SSW_Command_Base* SSW_InputManager::getCommandFromKey (SDL_Keycode kcode)
 {
   return keyPressMap_[kcode];
 }
@@ -137,7 +137,7 @@ void SSW_InputManager::executeMouseClick (Uint8 mouseButtonIndex)
   switch (mouseButtonIndex)
   {
     case 1:
-      for (MouseElement* mouseElement : vectorMouseElements_)
+      for (SSW_MouseElement* mouseElement : vectorMouseElements_)
       {
         if (mouseElement->intersects (mouseX, mouseY))
         {
@@ -146,7 +146,7 @@ void SSW_InputManager::executeMouseClick (Uint8 mouseButtonIndex)
         }
       }
     case 3:
-      for (MouseElement* mouseElement : vectorMouseElements_)
+      for (SSW_MouseElement* mouseElement : vectorMouseElements_)
       {
         if (mouseElement->intersects (mouseX, mouseY))
         {
@@ -163,12 +163,12 @@ void SSW_InputManager::executeMouseUnclick (Uint8 mouseButtonIndex)
   switch (mouseButtonIndex)
   {
     case 1:
-      for (MouseElement* inputElement : vectorMouseElements_)
+      for (SSW_MouseElement* inputElement : vectorMouseElements_)
       {
         inputElement->executeLeftUnclick ();
       }
     case 3:
-      for (MouseElement* inputElement : vectorMouseElements_)
+      for (SSW_MouseElement* inputElement : vectorMouseElements_)
       {
         inputElement->executeRightUnclick ();
       }
@@ -177,7 +177,7 @@ void SSW_InputManager::executeMouseUnclick (Uint8 mouseButtonIndex)
 
 void SSW_InputManager::executeMouseMove ()
 {
-  for (MouseElement* inputElement : vectorMouseElements_)
+  for (SSW_MouseElement* inputElement : vectorMouseElements_)
   {
     inputElement->executeMouseMove ();
   }

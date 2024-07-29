@@ -14,7 +14,7 @@ SSW_GraphicsManager::~SSW_GraphicsManager ()
   vectorSpriteData_.clear ();
   mSpritesTable_.clear ();
   
-  for (SSW_GraphicsElement* pGraphicsElement : vectorGraphicsElements_)
+  for (SSW_GraphicsElement_Base* pGraphicsElement : vectorGraphicsElements_)
   {
     delete pGraphicsElement;
   }
@@ -71,12 +71,12 @@ void SSW_GraphicsManager::setBackgroundColor (SDL_Color backgroundColor)
   backgroundColor_ = backgroundColor;
 }
 
-void SSW_GraphicsManager::registerGraphicsElement (SSW_GraphicsElement* graphicsElement)
+void SSW_GraphicsManager::registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement)
 {
   vectorGraphicsElements_.push_back (graphicsElement);
 }
 
-void SSW_GraphicsManager::registerGraphicsElementFront (SSW_GraphicsElement* graphicsElement)
+void SSW_GraphicsManager::registerGraphicsElementFront (SSW_GraphicsElement_Base* graphicsElement)
 {
   vectorGraphicsElements_.insert(vectorGraphicsElements_.begin (), graphicsElement);
 }

@@ -10,14 +10,14 @@ class SSW_InputManager
 	public:
 		SSW_InputManager ();
 
-		void encodeMapKey (SDL_Keycode, SSW_Command*);
+		void encodeMapKey (SDL_Keycode, SSW_Command_Base*);
 		void unmapKey (SDL_Keycode kcode);
 		void remapKey (SDL_Keycode src, SDL_Keycode dest);
 		
-		void registerMouseElement (MouseElement* mouseElement);
-		void registerMouseElementFront (MouseElement* mouseElement);
+		void registerMouseElement (SSW_MouseElement* mouseElement);
+		void registerMouseElementFront (SSW_MouseElement* mouseElement);
 
-		SSW_Command* getCommandFromKey (SDL_Keycode kcode);
+		SSW_Command_Base* getCommandFromKey (SDL_Keycode kcode);
 		// overloaded [] for getting and setting?
 
 		void awaitInput ();
@@ -32,9 +32,9 @@ class SSW_InputManager
 
 		SDL_Event currentEvent_;
 
-		std::map<SDL_Keycode, SSW_Command*> keyPressMap_;
+		std::map<SDL_Keycode, SSW_Command_Base*> keyPressMap_;
 
-		std::vector<MouseElement*> vectorMouseElements_;
+		std::vector<SSW_MouseElement*> vectorMouseElements_;
 
 		bool ctrlHeld_;
 		bool shiftHeld_;

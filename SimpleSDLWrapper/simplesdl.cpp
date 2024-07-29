@@ -35,7 +35,7 @@ SSW_Sprite* SSW_Window::getSpriteFromID (int spriteID)
   return graphicsMan_.getSpriteFromID (spriteID);
 }
 
-void SSW_Window::mapKey (SDL_Keycode kcode, SSW_Command* pCommand)
+void SSW_Window::mapKey (SDL_Keycode kcode, SSW_Command_Base* pCommand)
 {
   inputMan_.encodeMapKey (kcode, pCommand);
 }
@@ -55,22 +55,22 @@ void SSW_Window::handleInput ()
   inputMan_.awaitInput ();
 }
 
-void SSW_Window::registerGraphicsElement (SSW_GraphicsElement* graphicsElement)
+void SSW_Window::registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement)
 {
   graphicsMan_.registerGraphicsElement (graphicsElement);
 }
 
-void SSW_Window::registerGraphicsElementFront (SSW_GraphicsElement* graphicsElement)
+void SSW_Window::registerGraphicsElementFront (SSW_GraphicsElement_Base* graphicsElement)
 {
   graphicsMan_.registerGraphicsElementFront (graphicsElement);
 }
 
-void SSW_Window::registerMouseElement (MouseElement* mouseElement)
+void SSW_Window::registerMouseElement (SSW_MouseElement* mouseElement)
 {
   inputMan_.registerMouseElement (mouseElement);
 }
 
-void SSW_Window::registerMouseElementFront (MouseElement* mouseElement)
+void SSW_Window::registerMouseElementFront (SSW_MouseElement* mouseElement)
 {
   inputMan_.registerMouseElementFront (mouseElement);
 }

@@ -1,6 +1,6 @@
 #include "mouseelement.h"
 
-MouseElement::MouseElement ()
+SSW_MouseElement::SSW_MouseElement ()
 {
 	clickableRect_ = {0, 0, 0, 0};
 	onLeftClick_ = NULL;
@@ -13,8 +13,8 @@ MouseElement::MouseElement ()
 	isEnabled_ = true;
 }
 
-MouseElement::MouseElement (SDL_Rect clickableRect = {0, 0, 0, 0}, SSW_Command* onLeftClick = NULL, SSW_Command* onLeftUnclick = NULL, 
-														SSW_Command* onRightClick = NULL, SSW_Command* onRightUnclick = NULL, SSW_Command* onHover = NULL, SSW_Command* onMouseMove = NULL)
+SSW_MouseElement::SSW_MouseElement (SDL_Rect clickableRect = {0, 0, 0, 0}, SSW_Command_Base* onLeftClick = NULL, SSW_Command_Base* onLeftUnclick = NULL, 
+														SSW_Command_Base* onRightClick = NULL, SSW_Command_Base* onRightUnclick = NULL, SSW_Command_Base* onHover = NULL, SSW_Command_Base* onMouseMove = NULL)
 {
 	clickableRect_ = clickableRect;
 	onLeftClick_ = onLeftClick;
@@ -28,7 +28,7 @@ MouseElement::MouseElement (SDL_Rect clickableRect = {0, 0, 0, 0}, SSW_Command* 
 	
 }
 
-void MouseElement::executeLeftClick ()
+void SSW_MouseElement::executeLeftClick ()
 {
 	if (isEnabled_ && onLeftClick_ != NULL)
 	{
@@ -36,7 +36,7 @@ void MouseElement::executeLeftClick ()
 	}
 }
 
-void MouseElement::executeLeftUnclick ()
+void SSW_MouseElement::executeLeftUnclick ()
 {
 	if (isEnabled_ && onLeftUnclick_ != NULL)
 	{
@@ -44,7 +44,7 @@ void MouseElement::executeLeftUnclick ()
 	}
 }
 
-void MouseElement::executeRightClick ()
+void SSW_MouseElement::executeRightClick ()
 {
 	if (isEnabled_ && onRightClick_ != NULL)
 	{
@@ -52,7 +52,7 @@ void MouseElement::executeRightClick ()
 	}
 }
 
-void MouseElement::executeRightUnclick ()
+void SSW_MouseElement::executeRightUnclick ()
 {
 	if (isEnabled_ && onRightUnclick_ != NULL)
 	{
@@ -60,7 +60,7 @@ void MouseElement::executeRightUnclick ()
 	}
 }
 
-void MouseElement::checkAndExecuteHover ()
+void SSW_MouseElement::checkAndExecuteHover ()
 {
 	if (isEnabled_ && !isHovering_ && onHover_ != NULL)
 	{
@@ -69,7 +69,7 @@ void MouseElement::checkAndExecuteHover ()
 	}
 }
 
-void MouseElement::checkAndExecuteUnhover ()
+void SSW_MouseElement::checkAndExecuteUnhover ()
 {
 	if (isEnabled_ && isHovering_ && onHover_ != NULL)
 	{
@@ -78,7 +78,7 @@ void MouseElement::checkAndExecuteUnhover ()
 	}
 }
 
-void MouseElement::executeMouseMove ()
+void SSW_MouseElement::executeMouseMove ()
 {
 	if (isEnabled_ && onMouseMove_ != NULL)
 	{
@@ -86,22 +86,22 @@ void MouseElement::executeMouseMove ()
 	}
 }
 
-void MouseElement::enable ()
+void SSW_MouseElement::enable ()
 {
 	isEnabled_ = true;
 }
 
-void MouseElement::disable ()
+void SSW_MouseElement::disable ()
 {
 	isEnabled_ = false;
 }
 
-void MouseElement::toggle ()
+void SSW_MouseElement::toggle ()
 {
 	isEnabled_ = !isEnabled_;
 }
 
-bool MouseElement::intersects (int xPos, int yPos) const
+bool SSW_MouseElement::intersects (int xPos, int yPos) const
 {
 	SDL_Point mousePos = {xPos, yPos};
 	if (SDL_PointInRect (&mousePos, &clickableRect_))
@@ -114,48 +114,48 @@ bool MouseElement::intersects (int xPos, int yPos) const
 	}
 }
 
-bool MouseElement::getIsHovering ()
+bool SSW_MouseElement::getIsHovering ()
 {
 	return isHovering_;
 }
 
-void MouseElement::setClickableRect (SDL_Rect clickableRect)
+void SSW_MouseElement::setClickableRect (SDL_Rect clickableRect)
 {
 	clickableRect_ = clickableRect;
 }
 
-void MouseElement::moveClickableRect (int xPos, int yPos)
+void SSW_MouseElement::moveClickableRect (int xPos, int yPos)
 {
 	clickableRect_.x = xPos;
 	clickableRect_.y = yPos;
 }
 
-void MouseElement::setOnLeftClick (SSW_Command* onClick)
+void SSW_MouseElement::setOnLeftClick (SSW_Command_Base* onClick)
 {
 	onLeftClick_ = onClick;
 }
 
-void MouseElement::setOnLeftUnclick (SSW_Command* onUnclick)
+void SSW_MouseElement::setOnLeftUnclick (SSW_Command_Base* onUnclick)
 {
 	onLeftUnclick_ = onUnclick;
 }
 
-void MouseElement::setOnRightClick (SSW_Command* onRightClick)
+void SSW_MouseElement::setOnRightClick (SSW_Command_Base* onRightClick)
 {
 	onRightClick_ = onRightClick;
 }
 
-void MouseElement::setOnRightUnclick (SSW_Command* onRightUnclick)
+void SSW_MouseElement::setOnRightUnclick (SSW_Command_Base* onRightUnclick)
 {
 	onRightUnclick_ = onRightUnclick;
 }
 
-void MouseElement::setOnHover (SSW_Command* onHover)
+void SSW_MouseElement::setOnHover (SSW_Command_Base* onHover)
 {
 	onHover_ = onHover;
 }
 
-void MouseElement::setOnMouseMove (SSW_Command* onMouseMove)
+void SSW_MouseElement::setOnMouseMove (SSW_Command_Base* onMouseMove)
 {
 	onMouseMove_ = onMouseMove;
 }

@@ -1,49 +1,49 @@
 #include "graphicselement.h"
 
-SSW_GraphicsElement::SSW_GraphicsElement ()
+SSW_GraphicsElement_Base::SSW_GraphicsElement_Base ()
 {
 	destRect_ = {0, 0, 0, 0};
 	isEnabled_ = true;
 }
 
-void SSW_GraphicsElement::setDestRect (SDL_Rect destRect)
+void SSW_GraphicsElement_Base::setDestRect (SDL_Rect destRect)
 {
 	destRect_ = destRect;
 }
 
-void SSW_GraphicsElement::moveDestRect (int xPos, int yPos)
+void SSW_GraphicsElement_Base::moveDestRect (int xPos, int yPos)
 {
 	destRect_.x = xPos;
 	destRect_.y = yPos;
 }
 
-void SSW_GraphicsElement::enable ()
+void SSW_GraphicsElement_Base::enable ()
 {
 	isEnabled_ = true;
 }
 
-void SSW_GraphicsElement::disable ()
+void SSW_GraphicsElement_Base::disable ()
 {
 	isEnabled_ = false;
 }
 
-void SSW_GraphicsElement::toggle ()
+void SSW_GraphicsElement_Base::toggle ()
 {
 	isEnabled_ = !isEnabled_;
 }
 
-SpriteGraphicsElement::SpriteGraphicsElement ()
+SSW_GraphicsElement_Sprite::SSW_GraphicsElement_Sprite ()
 {
 	pSprite_ = NULL;
 }
 
-SpriteGraphicsElement::SpriteGraphicsElement (SSW_Sprite* pSprite)
-: SSW_GraphicsElement () 
+SSW_GraphicsElement_Sprite::SSW_GraphicsElement_Sprite (SSW_Sprite* pSprite)
+: SSW_GraphicsElement_Base () 
 {
 	pSprite_ = pSprite;
 }
 
-void SpriteGraphicsElement::render (SDL_Renderer* sdlrenderer)
+void SSW_GraphicsElement_Sprite::render (SDL_Renderer* sdlrenderer)
 {
 	if (isEnabled_ && (pSprite_ != NULL))
 	{
@@ -51,23 +51,23 @@ void SpriteGraphicsElement::render (SDL_Renderer* sdlrenderer)
 	}
 }
 
-void SpriteGraphicsElement::setSprite (SSW_Sprite* pSprite)
+void SSW_GraphicsElement_Sprite::setSprite (SSW_Sprite* pSprite)
 {
 	pSprite_ = pSprite;
 }
 
-SolidColorGraphicsElement::SolidColorGraphicsElement ()
+SSW_GraphicsElement_SolidColor::SSW_GraphicsElement_SolidColor ()
 {
 	renderColor_ = {0xFF, 0xFF, 0xFF, 0xFF};
 }
 
-SolidColorGraphicsElement::SolidColorGraphicsElement (SDL_Color renderColor)
-: SSW_GraphicsElement ()
+SSW_GraphicsElement_SolidColor::SSW_GraphicsElement_SolidColor (SDL_Color renderColor)
+: SSW_GraphicsElement_Base ()
 {
 	renderColor_ = renderColor;
 }
 
-void SolidColorGraphicsElement::render (SDL_Renderer* sdlrenderer)
+void SSW_GraphicsElement_SolidColor::render (SDL_Renderer* sdlrenderer)
 {
 	if (isEnabled_)
 	{
@@ -78,12 +78,12 @@ void SolidColorGraphicsElement::render (SDL_Renderer* sdlrenderer)
 	}
 }
 
-void SolidColorGraphicsElement::setColor (SDL_Color renderColor)
+void SSW_GraphicsElement_SolidColor::setColor (SDL_Color renderColor)
 {
 	renderColor_ = renderColor;
 }
 
-TTFGraphicsElement::TTFGraphicsElement ()
+SSW_GraphicsElement_TTF::SSW_GraphicsElement_TTF ()
 {
 	ttfFont_ = NULL;
 	bodyText_ = "";
@@ -92,8 +92,8 @@ TTFGraphicsElement::TTFGraphicsElement ()
 	textureNeedsUpdate_ = true;
 }
 
-TTFGraphicsElement::TTFGraphicsElement (TTF_Font* ttfFont, std::string bodyText, SDL_Color textColor) 
-	: SSW_GraphicsElement ()
+SSW_GraphicsElement_TTF::SSW_GraphicsElement_TTF (TTF_Font* ttfFont, std::string bodyText, SDL_Color textColor) 
+	: SSW_GraphicsElement_Base ()
 {
 	ttfFont_ = ttfFont;
 	bodyText_ = bodyText;
@@ -102,14 +102,14 @@ TTFGraphicsElement::TTFGraphicsElement (TTF_Font* ttfFont, std::string bodyText,
 	textureNeedsUpdate_ = true;
 }
 
-TTFGraphicsElement::~TTFGraphicsElement ()
+SSW_GraphicsElement_TTF::~SSW_GraphicsElement_TTF ()
 {
 	SDL_DestroyTexture (sdltexture_);
 }
 
 // RESIZING: Use same font every time? Or different fonts for different sizes?
 // if resizing accesses the disk, that's crazy inefficient
-void TTFGraphicsElement::render (SDL_Renderer* sdlrenderer)
+void SSW_GraphicsElement_TTF::render (SDL_Renderer* sdlrenderer)
 {
 	if (ttfFont_ != NULL && isEnabled_)
 	{
@@ -121,25 +121,25 @@ void TTFGraphicsElement::render (SDL_Renderer* sdlrenderer)
 	}
 }
 
-void TTFGraphicsElement::setBodyText (std::string bodyText)
+void SSW_GraphicsElement_TTF::setBodyText (std::string bodyText)
 {
 	bodyText_ = bodyText;
 	textureNeedsUpdate_ = true;
 }
 
-void TTFGraphicsElement::setTTFFont (TTF_Font* ttfFont)
+void SSW_GraphicsElement_TTF::setTTFFont (TTF_Font* ttfFont)
 {
 	ttfFont_ = ttfFont;
 	textureNeedsUpdate_ = true;
 }
 
-void TTFGraphicsElement::setTextColor (SDL_Color textColor)
+void SSW_GraphicsElement_TTF::setTextColor (SDL_Color textColor)
 {
 	textColor_ = textColor;
 	textureNeedsUpdate_ = true;
 }
 
-void TTFGraphicsElement::updateTexture (SDL_Renderer* sdlrenderer)
+void SSW_GraphicsElement_TTF::updateTexture (SDL_Renderer* sdlrenderer)
 {
 	SDL_Surface* textSurface = NULL;
 

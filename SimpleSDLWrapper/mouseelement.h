@@ -4,11 +4,11 @@
 
 #include "command.h"
 
-class MouseElement
+class SSW_MouseElement
 {
 	public:
-		MouseElement ();
-		MouseElement (SDL_Rect clickableRect, SSW_Command* onLeftClick, SSW_Command* onLeftUnclick, SSW_Command* onRightClick, SSW_Command* onRightUnclick, SSW_Command* onHover, SSW_Command* onMouseMove);
+		SSW_MouseElement ();
+		SSW_MouseElement (SDL_Rect clickableRect, SSW_Command_Base* onLeftClick, SSW_Command_Base* onLeftUnclick, SSW_Command_Base* onRightClick, SSW_Command_Base* onRightUnclick, SSW_Command_Base* onHover, SSW_Command_Base* onMouseMove);
 		void executeLeftClick ();
 		void executeLeftUnclick ();
 		void executeRightClick ();
@@ -27,20 +27,20 @@ class MouseElement
 		void setClickableRect (SDL_Rect clickableRect);
 		
 		void moveClickableRect (int xPos, int yPos);
-		void setOnLeftClick (SSW_Command* onLeftClick);
-		void setOnLeftUnclick (SSW_Command* onLeftUnclick);
-		void setOnRightClick (SSW_Command* onRightClick);
-		void setOnRightUnclick (SSW_Command* onRightUnclick);
-		void setOnHover (SSW_Command* onHover);
-		void setOnMouseMove (SSW_Command* onMouseMove);
+		void setOnLeftClick (SSW_Command_Base* onLeftClick);
+		void setOnLeftUnclick (SSW_Command_Base* onLeftUnclick);
+		void setOnRightClick (SSW_Command_Base* onRightClick);
+		void setOnRightUnclick (SSW_Command_Base* onRightUnclick);
+		void setOnHover (SSW_Command_Base* onHover);
+		void setOnMouseMove (SSW_Command_Base* onMouseMove);
 	protected:
 		SDL_Rect clickableRect_;
-		SSW_Command* onLeftClick_;
-		SSW_Command* onLeftUnclick_;
-		SSW_Command* onRightClick_;
-		SSW_Command* onRightUnclick_;
-		SSW_Command* onHover_;
-		SSW_Command* onMouseMove_;
+		SSW_Command_Base* onLeftClick_;
+		SSW_Command_Base* onLeftUnclick_;
+		SSW_Command_Base* onRightClick_;
+		SSW_Command_Base* onRightUnclick_;
+		SSW_Command_Base* onHover_;
+		SSW_Command_Base* onMouseMove_;
 
 		bool isHovering_;
 		bool isEnabled_;

@@ -6,10 +6,10 @@
 
 #include "sprite.h"
 
-class SSW_GraphicsElement
+class SSW_GraphicsElement_Base
 {
 	public:
-		SSW_GraphicsElement ();
+		SSW_GraphicsElement_Base ();
 		virtual void render (SDL_Renderer* sdlrenderer) = 0;
 		void setDestRect (SDL_Rect destRect);
 		// likely to be removed
@@ -23,34 +23,34 @@ class SSW_GraphicsElement
 		bool isEnabled_;
 };
 
-class SpriteGraphicsElement : public SSW_GraphicsElement
+class SSW_GraphicsElement_Sprite : public SSW_GraphicsElement_Base
 {
 	public:
-		SpriteGraphicsElement ();
-		SpriteGraphicsElement (SSW_Sprite* pSprite);
+		SSW_GraphicsElement_Sprite ();
+		SSW_GraphicsElement_Sprite (SSW_Sprite* pSprite);
 		virtual void render (SDL_Renderer* sdlrenderer);
 		void setSprite (SSW_Sprite* pSprite);
 	private:
 		SSW_Sprite* pSprite_;
 };
 
-class SolidColorGraphicsElement : public SSW_GraphicsElement
+class SSW_GraphicsElement_SolidColor : public SSW_GraphicsElement_Base
 {
 	public:
-		SolidColorGraphicsElement ();
-		SolidColorGraphicsElement (SDL_Color renderColor);
+		SSW_GraphicsElement_SolidColor ();
+		SSW_GraphicsElement_SolidColor (SDL_Color renderColor);
 		virtual void render (SDL_Renderer* sdlrenderer);
 		void setColor (SDL_Color renderColor);
 	private:
 		SDL_Color renderColor_;
 };
 
-class TTFGraphicsElement : public SSW_GraphicsElement
+class SSW_GraphicsElement_TTF : public SSW_GraphicsElement_Base
 {
 	public:
-		TTFGraphicsElement ();
-		TTFGraphicsElement (TTF_Font*, std::string, SDL_Color textColor);
-		~TTFGraphicsElement ();
+		SSW_GraphicsElement_TTF ();
+		SSW_GraphicsElement_TTF (TTF_Font*, std::string, SDL_Color textColor);
+		~SSW_GraphicsElement_TTF ();
 		virtual void render (SDL_Renderer* sdlrenderer);
 		void setBodyText (std::string bodyText);
 		void setTTFFont (TTF_Font* ttfFont);
