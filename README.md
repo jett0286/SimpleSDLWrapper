@@ -1,6 +1,6 @@
 # SimpleSDLWrapper
 
-SimpleSDLWrapper is a set of classes designed to automate some of the more tedious and hard-to-learn parts of SDL. Because of this, **almost all non-essential features are missing**. For example, the only shape a clickable screen area can currently take is a rectangle. The guiding design principle of this library is to make simple SDL projects easy to start.
+SimpleSDLWrapper is a set of classes designed to automate some of the more tedious and hard-to-learn parts of SDL. Because of this, **almost all non-essential features are missing**. The guiding design principle of this library is to make simple SDL projects easy to start.
 
 ## Compilation from source
 *(Note to self: x86 support? Linux support?)*
