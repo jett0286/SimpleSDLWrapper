@@ -19,16 +19,6 @@ int main ()
     SSW_GraphicsElement_SolidColor green ({ 0x00, 0xFF, 0x00, 0xFF });
     SSW_GraphicsElement_SolidColor blue ({ 0x00, 0x00, 0xFF, 0xFF });
 
-    red.setDestRect ({0, 0, 100, 100});
-    green.setDestRect ({50, 50, 100, 100});
-    blue.setDestRect ({100, 100, 100, 100});
-
-    blue.setPriority (100);
-
-    testWindow.registerGraphicsElement (&red);
-    testWindow.registerGraphicsElement (&green);
-    testWindow.registerGraphicsElement (&blue);
-
     testWindow.mapKey (SDLK_ESCAPE, &quitCommand);
 
     while (true)
