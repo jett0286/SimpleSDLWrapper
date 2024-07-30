@@ -35,10 +35,6 @@ void SSW_InputManager::registerMouseElement (SSW_MouseElement* mouseElement)
     {
       continue;
     }
-    else if (mouseElement->getPriority() == (*i)->getPriority())
-    {
-      break;
-    }
     else
     {
       break;

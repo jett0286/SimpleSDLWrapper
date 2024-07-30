@@ -73,7 +73,22 @@ void SSW_GraphicsManager::setBackgroundColor (SDL_Color backgroundColor)
 
 void SSW_GraphicsManager::registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement)
 {
-  vectorGraphicsElements_.push_back (graphicsElement);
+  std::vector<SSW_GraphicsElement_Base*>::iterator i;
+
+  for (i = vectorGraphicsElements_.begin (); i != vectorGraphicsElements_.end (); i++)
+  {
+    // IF SOMETHING DOESN'T WORK WITH PRIORITY, IT'S PROBABLY THIS
+    // NOTE: VECTOR IS STORED IN INCREASING PRIORITY ORDER
+    if (graphicsElement->getPriority () > (*i)->getPriority ())
+    {
+      continue;
+    }
+    else
+    {
+      break;
+    }
+  }
+  vectorGraphicsElements_.insert (i, graphicsElement);
 }
 
 void SSW_GraphicsManager::loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth)

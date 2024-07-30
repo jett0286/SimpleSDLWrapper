@@ -11,16 +11,21 @@ class SSW_GraphicsElement_Base
 	public:
 		SSW_GraphicsElement_Base ();
 		virtual void render (SDL_Renderer* sdlrenderer) = 0;
+		
 		void setDestRect (SDL_Rect destRect);
-		// likely to be removed
 		void moveDestRect (int xPos, int yPos);
+		
 		void enable ();
 		void disable ();
 		void toggle ();
 
+		void setPriority (int priority);
+		int getPriority ();
 	protected:
 		SDL_Rect destRect_;
 		bool isEnabled_;
+		
+		int priority_;
 };
 
 class SSW_GraphicsElement_Sprite : public SSW_GraphicsElement_Base

@@ -4,6 +4,7 @@ SSW_GraphicsElement_Base::SSW_GraphicsElement_Base ()
 {
 	destRect_ = {0, 0, 0, 0};
 	isEnabled_ = true;
+	priority_ = 0;
 }
 
 void SSW_GraphicsElement_Base::setDestRect (SDL_Rect destRect)
@@ -30,6 +31,16 @@ void SSW_GraphicsElement_Base::disable ()
 void SSW_GraphicsElement_Base::toggle ()
 {
 	isEnabled_ = !isEnabled_;
+}
+
+void SSW_GraphicsElement_Base::setPriority (int priority)
+{
+	priority_ = priority;
+}
+
+int SSW_GraphicsElement_Base::getPriority ()
+{
+	return priority_;
 }
 
 SSW_GraphicsElement_Sprite::SSW_GraphicsElement_Sprite ()
