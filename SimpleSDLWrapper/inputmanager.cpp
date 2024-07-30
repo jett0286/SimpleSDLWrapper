@@ -30,8 +30,8 @@ void SSW_InputManager::registerMouseElement (SSW_MouseElement* mouseElement)
   
   for (i = vectorMouseElements_.begin (); i != vectorMouseElements_.end (); i++)
   {
-    // IF SOMETHING DOESN"T WORK WITH PRIORITY< IT"S PROBABLY THIS
-    if (mouseElement->getPriority() > (*i)->getPriority ())
+    // IF SOMETHING DOESN'T WORK WITH PRIORITY, IT'S PROBABLY THIS
+    if (mouseElement->getPriority() < (*i)->getPriority ())
     {
       continue;
     }
@@ -41,7 +41,6 @@ void SSW_InputManager::registerMouseElement (SSW_MouseElement* mouseElement)
     }
     else
     {
-      i--; // overstep of 1, stepping back
       break;
     }
   }
