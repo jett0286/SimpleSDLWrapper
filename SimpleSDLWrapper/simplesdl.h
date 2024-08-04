@@ -1,4 +1,3 @@
-// TO BE RENAMED
 #pragma once
 
 #include "inputmanager.h"
@@ -27,7 +26,16 @@ class SSW_Window
 		void registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement);
 		void registerMouseElement (SSW_MouseElement* mouseElement);
 
+		void setFPS (int framesPerSecond);
+
+		void startTimer ();
+		void endTimerAndWait (); // rename me
+
 	private:
+		int framesPerSecond_;
+		int ticksPerFrame_;
+		Uint32 ticks_;
+
 		SSW_InputManager inputMan_;
 		SSW_GraphicsManager graphicsMan_;
 };

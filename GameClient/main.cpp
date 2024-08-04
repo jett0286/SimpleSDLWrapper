@@ -4,32 +4,35 @@
 #include <iostream>
 #include <simplesdl.h>
 
+#include "playingcard.h"
+
 #define FRAMES_PER_SECOND 60
 #define TICKS_PER_FRAME (1000 / FRAMES_PER_SECOND)
 
 #undef main
 
+
+
 int main ()
 {
-    SSW_Window testWindow;
-    SSW_Command_Quit quitCommand;
-    Uint32 ticks = 0;
+  SSW_Window testWindow;
+  SSW_Command_Quit quitCommand;
 
-    SSW_GraphicsElement_SolidColor red ({0xFF, 0x00, 0x00, 0xFF});
-    SSW_GraphicsElement_SolidColor green ({ 0x00, 0xFF, 0x00, 0xFF });
-    SSW_GraphicsElement_SolidColor blue ({ 0x00, 0x00, 0xFF, 0xFF });
+  PlayingCard TwoDiamonds;
 
-    testWindow.mapKey (SDLK_ESCAPE, &quitCommand);
+  testWindow.setBackgroundColor ({0x11, 0x88, 0x11});
+  testWindow.mapKey (SDLK_ESCAPE, &quitCommand);
+  testWindow.loadSprites ("playingCards.png", 190, 140);
 
-    while (true)
-    {
-      ticks = SDL_GetTicks ();
-      testWindow.handleInput ();
-      testWindow.refresh ();
-      ticks = SDL_GetTicks () - ticks; // using ticks for 2 different things, bad example
-      if (ticks < TICKS_PER_FRAME)
-      {
-        SDL_Delay (TICKS_PER_FRAME - ticks);
-      }
-    }
+  TwoDiamonds.setSprite (testWindow.getSpriteFromID (2));
+  TwoDiamonds.setDestRect ({100, 100, 140, 190});
+  TwoDiamonds.registerElems (&testWindow);
+
+  while (true)
+  {
+    testWindow.startTimer ();
+    testWindow.handleInput ();
+    testWindow.refresh ();
+    testWindow.endTimerAndWait ();
+  }
 }
