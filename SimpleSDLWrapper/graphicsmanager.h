@@ -11,6 +11,7 @@
 class SSW_GraphicsManager
 {
 	public:
+		SSW_GraphicsManager ();
 		~SSW_GraphicsManager ();
 		bool initSDL (int winHeight, int winWidth);
 		void refresh ();
@@ -19,7 +20,7 @@ class SSW_GraphicsManager
 
 		void registerGraphicsElement (SSW_GraphicsElement_Base* graphicsElement);
 
-		void loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth);
+		void loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth, int maxSpritesToLoad);
 		void unloadSprites ();
 		SSW_Sprite* getSpriteFromID (int spriteID);
 
@@ -34,14 +35,12 @@ class SSW_GraphicsManager
 
 		SDL_Window* sdlwindow_;
 		SDL_Renderer* sdlrenderer_;
-		SDL_Texture* spritesheet_;
 
 		SDL_Color backgroundColor_;
 
-		// the integer stores the priority, highest is drawn to the front
 		std::vector<SSW_GraphicsElement_Base*> vectorGraphicsElements_;
 
 		std::vector<SSW_Sprite*> vectorSpriteData_;
-		std::map<std::string, SSW_Sprite*> mSpritesTable_;
+		std::vector<SDL_Texture*> vectorSpritesheets_;
 };
 

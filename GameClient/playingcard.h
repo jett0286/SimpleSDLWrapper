@@ -40,8 +40,12 @@ class PlayingCard
 
 		void setDestRect (SDL_Rect);
 		void setSprite (SSW_Sprite*);
+		void setPriority (int priority);
 
 		void registerElems (SSW_Window*);
+
+		void enable ();
+		void disable ();
 	private:
 		SSW_GraphicsElement_Sprite gfxElement_;
 		PlayingCard_Denomination denomination_;

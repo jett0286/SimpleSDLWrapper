@@ -21,13 +21,37 @@
     <ClCompile Include="playingcard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cardstack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="playingCards.png">
+    <Image Include="cardbacks.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="decks.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="decks2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="clubs.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="diamonds.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="hearts.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="spades.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cardstack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="playingcard.h">
       <Filter>Header Files</Filter>
     </ClInclude>

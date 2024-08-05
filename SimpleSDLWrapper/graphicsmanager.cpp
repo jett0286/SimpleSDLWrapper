@@ -1,18 +1,21 @@
 
 #include "graphicsmanager.h"
 
+SSW_GraphicsManager::SSW_GraphicsManager ()
+{
+  winWidth_ = 640;
+  winHeight_ = 480;
+  sdlwindow_ = NULL;
+  sdlrenderer_ = NULL;
+  backgroundColor_ = {0x00, 0x00, 0x00, 0xFF};
+}
+
 SSW_GraphicsManager::~SSW_GraphicsManager ()
 {
   SDL_DestroyWindow (sdlwindow_);
   SDL_DestroyRenderer (sdlrenderer_);
-  SDL_DestroyTexture (spritesheet_);
-
-  for (SSW_Sprite* pSprite : vectorSpriteData_)
-  {
-    delete pSprite;
-  }
-  vectorSpriteData_.clear ();
-  mSpritesTable_.clear ();
+  
+  unloadSprites ();
   
   for (SSW_GraphicsElement_Base* pGraphicsElement : vectorGraphicsElements_)
   {
@@ -25,7 +28,6 @@ bool SSW_GraphicsManager::initSDL (int winHeight, int winWidth)
 {
   sdlrenderer_ = NULL;
   sdlwindow_ = NULL;
-  spritesheet_ = NULL;
   backgroundColor_ = {0x00, 0x00, 0x00, 0xFF};
   winHeight_ = winHeight;
   winWidth_ = winWidth;
@@ -91,17 +93,19 @@ void SSW_GraphicsManager::registerGraphicsElement (SSW_GraphicsElement_Base* gra
   vectorGraphicsElements_.insert (i, graphicsElement);
 }
 
-void SSW_GraphicsManager::loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth)
+void SSW_GraphicsManager::loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth, int maxSpritesToLoad)
 {
   SSW_Sprite* pActiveSprite;
+  SDL_Texture* spritesheet = IMG_LoadTexture (sdlrenderer_, spritesheetPath);
   int spritesheetHeight;
   int spritesheetWidth;
   int numSpritesVert;
   int numSpritesHoriz;
+  int i = 0;
 
-  spritesheet_ = IMG_LoadTexture (sdlrenderer_, spritesheetPath);
+  vectorSpritesheets_.push_back (spritesheet);
 
-  SDL_QueryTexture (spritesheet_, NULL, NULL, &spritesheetWidth, &spritesheetHeight);
+  SDL_QueryTexture (spritesheet, NULL, NULL, &spritesheetWidth, &spritesheetHeight);
   numSpritesVert = spritesheetHeight / spriteHeight;
   numSpritesHoriz = spritesheetWidth / spriteWidth;
 
@@ -109,7 +113,12 @@ void SSW_GraphicsManager::loadSprites (const char* spritesheetPath, int spriteHe
   {
     for (int x = 0; x < numSpritesHoriz; x++)
     {
-      pActiveSprite = new SSW_Sprite (spritesheet_, x * spriteWidth, y * spriteHeight, spriteWidth, spriteHeight);
+      i++;
+      if (i > maxSpritesToLoad)
+      {
+        return;
+      }
+      pActiveSprite = new SSW_Sprite (spritesheet, x * spriteWidth, y * spriteHeight, spriteWidth, spriteHeight);
       vectorSpriteData_.push_back (pActiveSprite);
     }
   }
@@ -117,11 +126,17 @@ void SSW_GraphicsManager::loadSprites (const char* spritesheetPath, int spriteHe
 
 void SSW_GraphicsManager::unloadSprites ()
 {
-  spritesheet_ = NULL;
+  for (SDL_Texture* sdltexture : vectorSpritesheets_)
+  {
+    SDL_DestroyTexture (sdltexture);
+  }
   for (SSW_Sprite* pSprite : vectorSpriteData_)
   {
     delete pSprite;
   }
+
+  vectorSpritesheets_.clear ();
+  vectorSpriteData_.clear ();
 }
 
 SSW_Sprite* SSW_GraphicsManager::getSpriteFromID (int spriteID)

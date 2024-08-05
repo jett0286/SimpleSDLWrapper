@@ -28,9 +28,24 @@ void PlayingCard::setSprite (SSW_Sprite* pSprite)
 	gfxElement_.setSprite (pSprite);
 }
 
+void PlayingCard::setPriority (int priority)
+{
+	gfxElement_.setPriority (priority);
+}
+
 void PlayingCard::registerElems (SSW_Window* pWindow)
 {
 	pWindow->registerGraphicsElement (&gfxElement_);
+}
+
+void PlayingCard::enable ()
+{
+	gfxElement_.enable ();
+}
+
+void PlayingCard::disable ()
+{
+	gfxElement_.disable ();
 }
 
 void PlayingCard::updateElemRects ()

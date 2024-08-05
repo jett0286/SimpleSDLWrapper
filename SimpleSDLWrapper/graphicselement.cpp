@@ -157,6 +157,8 @@ void SSW_GraphicsElement_TTF::updateTexture (SDL_Renderer* sdlrenderer)
 	destRect_.w = textSurface->w;
 	destRect_.h = textSurface->h;
 
+	SDL_SetTextureBlendMode (sdltexture_, SDL_BLENDMODE_BLEND);
+
 	textureNeedsUpdate_ = false;
 
 	SDL_FreeSurface (textSurface);

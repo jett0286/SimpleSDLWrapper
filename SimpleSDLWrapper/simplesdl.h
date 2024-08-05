@@ -13,7 +13,7 @@ class SSW_Window
 		
 		void setBackgroundColor (SDL_Color backgroundColor);
 
-		void loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth);
+		void loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth, int maxSpritesToLoad = INT_MAX);
 		void unloadSprites ();
 
 		SSW_Sprite* getSpriteFromID (int spriteID);

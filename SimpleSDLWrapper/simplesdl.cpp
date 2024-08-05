@@ -26,9 +26,9 @@ void SSW_Window::setBackgroundColor (SDL_Color backgroundColor)
   graphicsMan_.setBackgroundColor (backgroundColor);
 }
 
-void SSW_Window::loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth)
+void SSW_Window::loadSprites (const char* spritesheetPath, int spriteHeight, int spriteWidth, int maxSpritesToLoad)
 {
-  graphicsMan_.loadSprites (spritesheetPath, spriteHeight, spriteWidth);
+  graphicsMan_.loadSprites (spritesheetPath, spriteHeight, spriteWidth, maxSpritesToLoad);
 }
 
 void SSW_Window::unloadSprites ()

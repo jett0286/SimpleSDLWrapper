@@ -5,34 +5,60 @@
 #include <simplesdl.h>
 
 #include "playingcard.h"
-
-#define FRAMES_PER_SECOND 60
-#define TICKS_PER_FRAME (1000 / FRAMES_PER_SECOND)
+#include "cardstack.h"
 
 #undef main
 
-
+class CommandPopStack : public SSW_Command_Base
+{
+	public:
+		CommandPopStack (CardStack* stackToPop)
+		{
+			stackToPop_ = stackToPop;
+		}
+		virtual void execute ()
+		{
+			stackToPop_->popCard ();
+		}
+	private:
+		CardStack* stackToPop_;
+};
 
 int main ()
 {
-  SSW_Window testWindow;
-  SSW_Command_Quit quitCommand;
+	SSW_Window testWindow;
+	SSW_Command_Quit quitCommand;
 
-  PlayingCard TwoDiamonds;
+	PlayingCard* dummyCard;
+	CardStack stack;
 
-  testWindow.setBackgroundColor ({0x11, 0x88, 0x11});
-  testWindow.mapKey (SDLK_ESCAPE, &quitCommand);
-  testWindow.loadSprites ("playingCards.png", 190, 140);
+	testWindow.setBackgroundColor ({0x11, 0x88, 0x11});
+	testWindow.mapKey (SDLK_ESCAPE, &quitCommand);
+	testWindow.loadSprites ("clubs.png", 124, 88, 13);
+	testWindow.loadSprites ("hearts.png", 124, 88, 13);
+	testWindow.loadSprites ("diamonds.png", 124, 88, 13);
+	testWindow.loadSprites ("spades.png", 124, 88, 13);
 
-  TwoDiamonds.setSprite (testWindow.getSpriteFromID (2));
-  TwoDiamonds.setDestRect ({100, 100, 140, 190});
-  TwoDiamonds.registerElems (&testWindow);
+	stack.setDestRect ({ 100, 100, 88, 124 });
+	stack.registerElements (&testWindow);
 
-  while (true)
-  {
-    testWindow.startTimer ();
-    testWindow.handleInput ();
-    testWindow.refresh ();
-    testWindow.endTimerAndWait ();
-  }
+	for (int i = 0; i < 52; i++)
+	{
+		dummyCard = new PlayingCard (testWindow.getSpriteFromID (i), NO_DENOM, NO_SUIT);
+		
+		dummyCard->setPriority (i);
+		dummyCard->registerElems (&testWindow);
+		
+		stack.pushCard (dummyCard);
+	}
+	
+	testWindow.mapKey (SDLK_SPACE, new CommandPopStack (&stack));
+
+	while (true)
+	{
+		testWindow.startTimer ();
+		testWindow.handleInput ();
+		testWindow.refresh ();
+		testWindow.endTimerAndWait ();
+	}
 }

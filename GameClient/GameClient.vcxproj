@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cardstack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="playingcard.cpp" />
   </ItemGroup>
@@ -144,9 +145,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="playingCards.png" />
+    <Image Include="cardbacks.png" />
+    <Image Include="decks.png" />
+    <Image Include="decks2.png" />
+    <Image Include="clubs.png" />
+    <Image Include="diamonds.png" />
+    <Image Include="hearts.png" />
+    <Image Include="spades.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cardstack.h" />
     <ClInclude Include="playingcard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
