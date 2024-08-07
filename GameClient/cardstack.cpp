@@ -5,7 +5,7 @@ CardStack::CardStack ()
 	destRect_ = {100, 100, 100, 100};
 	gfxElemBackground.setDestRect (destRect_);
 	gfxElemBackground.setColor ({0x00, 0x00, 0x00, 0x88});
-	gfxElemBackground.setPriority (0);
+	gfxElemBackground.setPriority (-1);
 }
 
 void CardStack::pushCard (PlayingCard* playingCard)
@@ -17,10 +17,18 @@ void CardStack::pushCard (PlayingCard* playingCard)
 
 PlayingCard* CardStack::popCard ()
 {
-	PlayingCard* returnVal = stackCardsInPile_.top ();
-	stackCardsInPile_.pop ();
-	returnVal->disable (); // REMOVE ME
-	return returnVal;
+	PlayingCard* returnVal;
+	if (stackCardsInPile_.empty ())
+	{
+		return NULL;
+	}
+	else
+	{
+		returnVal = stackCardsInPile_.top ();
+		stackCardsInPile_.pop ();
+		returnVal->disable (); // REMOVE ME
+		return returnVal;
+	}
 }
 
 void CardStack::setDestRect (SDL_Rect destRect)
